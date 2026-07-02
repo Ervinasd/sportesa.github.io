@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sportesa – 24/7 Sporto klubas Telšiuose</title>
+  <meta name="description" content="Sporto klubas Sportesa Telšiuose – tavo vieta aktyviam gyvenimui! Siūlome 24/7 prieigą, treniruoklius, grupines treniruotes, oro jogą ir bokso maišą." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #0f0f0f;
+      --dark:    #1a1a1a;
+      --panel:   #222222;
+      --border:  #2e2e2e;
+      --mid:     #5a5a5a;
+      --light:   #a0a0a0;
+      --cream:   #f0ede8;
+      --red:     #e8243c;
+      --red-dim: #b01c2e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--black);
+      color: var(--cream);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5vw;
+      height: 68px;
+      background: rgba(15,15,15,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.9rem;
+      letter-spacing: 0.06em;
+      color: var(--cream);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--red); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--light);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--cream); }
+
+    .nav-social { display: flex; gap: 1rem; align-items: center; }
+    .nav-social a { color: var(--mid); transition: color 0.2s; }
+    .nav-social a:hover { color: var(--red); }
+    .nav-social svg { width: 18px; height: 18px; fill: currentColor; }
+
+    /* hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--cream); border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* mobile menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 68px; left: 0; right: 0;
+      background: var(--dark);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 5vw 2rem;
+      z-index: 99;
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+    .mobile-menu a {
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--light);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      align-items: flex-end;
+      padding: 0 5vw 8vh;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to right, rgba(15,15,15,0.85) 0%, rgba(15,15,15,0.3) 100%),
+        url('https://images.squarespace-cdn.com/content/v1/67856bdf8d65865fa68c9dc2/e47b3176-4fae-406a-bc7e-02e098b19458/SKP_5006fcbk.jpg') center/cover no-repeat;
+    }
+
+    /* diagonal red slash — signature element */
+    .hero-slash {
+      position: absolute;
+      top: 0; right: 18vw;
+      width: 4px;
+      height: 100%;
+      background: var(--red);
+      transform: skewX(-8deg);
+      opacity: 0.7;
+    }
+    .hero-slash::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 12px;
+      width: 2px; height: 100%;
+      background: var(--red);
+      opacity: 0.3;
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 700px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1rem;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title em {
+      font-style: normal;
+      color: var(--red);
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(240,237,232,0.7);
+      max-width: 440px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cream);
+      border: 1px solid var(--red);
+      padding: 0.85rem 2rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .hero-cta:hover { background: var(--red); }
+    .hero-cta svg { width: 14px; height: 14px; fill: currentColor; }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      overflow: hidden;
+      background: var(--red);
+      padding: 0.75rem 0;
+      white-space: nowrap;
+    }
+    .marquee-track {
+      display: inline-flex;
+      animation: marquee 18s linear infinite;
+    }
+    .marquee-item {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.18em;
+      color: var(--cream);
+      padding: 0 3rem;
+    }
+    .marquee-dot {
+      display: inline-block;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: rgba(240,237,232,0.5);
+      vertical-align: middle;
+      margin-right: 3rem;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track { animation: none; }
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 7rem 5vw; }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1.2rem;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      letter-spacing: 0.03em;
+      line-height: 1;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+
+    .divider {
+      width: 48px; height: 3px;
+      background: var(--red);
+      margin: 1.5rem 0 2.5rem;
+    }
+
+    /* ── ABOUT ── */
+    #apie { background: var(--dark); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      max-width: 1200px;
+    }
+
+    .about-img {
+      position: relative;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+    }
+    .about-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .about-img::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 40%;
+      background: linear-gradient(to top, var(--dark), transparent);
+    }
+    .about-img-badge {
+      position: absolute;
+      bottom: 1.5rem; left: 1.5rem;
+      z-index: 1;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      color: var(--red);
+      border: 1px solid var(--red);
+      padding: 0.4rem 0.9rem;
+    }
+
+    .about-text p {
+      color: rgba(240,237,232,0.65);
+      font-size: 0.97rem;
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+    }
+
+    .feature-list {
+      list-style: none;
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      font-size: 0.92rem;
+      color: var(--cream);
+    }
+    .feature-list li::before {
+      content: '';
+      display: block;
+      flex-shrink: 0;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--red);
+      margin-top: 0.55em;
+    }
+
+    /* ── MEMBERSHIPS INFO ── */
+    #narystes { background: var(--black); }
+
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      max-width: 1200px;
+    }
+
+    .plan-card {
+      background: var(--dark);
+      padding: 2.2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: background 0.2s;
+    }
+    .plan-card:hover { background: var(--panel); }
+
+    .plan-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      line-height: 1;
+      color: var(--red);
+      letter-spacing: 0.02em;
+    }
+    .plan-price span {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--light);
+      letter-spacing: 0.05em;
+    }
+
+    .plan-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.06em;
+      color: var(--cream);
+    }
+
+    .plan-desc {
+      font-size: 0.85rem;
+      color: rgba(240,237,232,0.55);
+      line-height: 1.7;
+      flex: 1;
+    }
+
+    .plan-hours {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--red);
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+    }
+
+    /* ── SCHEDULE ── */
+    #tvarkarastis { background: var(--dark); }
+
+    .schedule-intro {
+      max-width: 560px;
+      margin-bottom: 3rem;
+    }
+    .schedule-intro p {
+      color: rgba(240,237,232,0.6);
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    .schedule-table-wrap { overflow-x: auto; }
+
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .schedule-table th {
+      text-align: left;
+      padding: 0.9rem 1.4rem;
+      background: var(--panel);
+      color: var(--light);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      white-space: nowrap;
+    }
+    .schedule-table td {
+      padding: 1rem 1.4rem;
+      border-bottom: 1px solid var(--border);
+      color: rgba(240,237,232,0.75);
+      white-space: nowrap;
+    }
+    .schedule-table tr:hover td { background: var(--panel); }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+      background: rgba(232,36,60,0.15);
+      color: var(--red);
+    }
+    .tag.green {
+      background: rgba(60,200,100,0.12);
+      color: #4ccc78;
+    }
+
+    /* ── CONTACT ── */
+    #kontaktai { background: var(--black); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      max-width: 1000px;
+      align-items: start;
+    }
+
+    .contact-block { display: flex; flex-direction: column; gap: 2rem; }
+
+    .contact-item { display: flex; flex-direction: column; gap: 0.3rem; }
+    .contact-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+    .contact-value {
+      font-size: 1rem;
+      color: var(--cream);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    a.contact-value:hover { color: var(--red); }
+
+    .map-embed {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border: 1px solid var(--border);
+      filter: grayscale(1) invert(0.85) hue-rotate(180deg);
+      opacity: 0.8;
+    }
+
+    .social-row {
+      display: flex;
+      gap: 1.2rem;
+      margin-top: 0.5rem;
+    }
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--light);
+      border: 1px solid var(--border);
+      padding: 0.6rem 1.1rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .social-btn:hover { border-color: var(--red); color: var(--red); }
+    .social-btn svg { width: 14px; height: 14px; fill: currentColor; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.06em;
+      color: var(--cream);
+      text-decoration: none;
+    }
+    .footer-logo span { color: var(--red); }
+
+    footer p {
+      font-size: 0.78rem;
+      color: var(--mid);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .nav-links, .nav-social { display: none; }
+      .hamburger { display: flex; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-img { aspect-ratio: 16/9; }
+
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    }
+
+    @media (max-width: 540px) {
+      .hero-title { font-size: 3.5rem; }
+      section { padding: 5rem 5vw; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#"><span>S</span>portesa</a>
+  <ul class="nav-links">
+    <li><a href="#apie">Apie mus</a></li>
+    <li><a href="#narystes">Narystės</a></li>
+    <li><a href="#tvarkarastis">Tvarkaraštis</a></li>
+    <li><a href="#kontaktai">Kontaktai</a></li>
+  </ul>
+  <div class="nav-social">
+    <a href="https://www.facebook.com/Sportesa1" target="_blank" rel="noopener" aria-label="Facebook">
+      <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+    </a>
+    <a href="https://www.instagram.com/sportesa_club" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="var(--dark)"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="var(--dark)" stroke-width="2" stroke-linecap="round"/></svg>
+    </a>
+  </div>
+  <button class="hamburger" id="burger" aria-label="Meniu" onclick="document.getElementById('mobileMenu').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#apie" onclick="document.getElementById('mobileMenu').classList.remove('open')">Apie mus</a></li>
+    <li><a href="#narystes" onclick="document.getElementById('mobileMenu').classList.remove('open')">Narystės</a></li>
+    <li><a href="#tvarkarastis" onclick="document.getElementById('mobileMenu').classList.remove('open')">Tvarkaraštis</a></li>
+    <li><a href="#kontaktai" onclick="document.getElementById('mobileMenu').classList.remove('open')">Kontaktai</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-slash"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Telšiai · 24/7 prieiga</p>
+    <h1 class="hero-title">Sporto<br/>klubas<br/><em>Sportesa</em></h1>
+    <p class="hero-sub">Tavo vieta aktyviam gyvenimui – treniruokliai, grupinės treniruotės, oro joga ir bokso maišas. Sportuok tada, kai tau patogiausia.</p>
+    <a class="hero-cta" href="#kontaktai">
+      Susisiekite su mumis
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item">24/7 Prieiga</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Grupinės Treniruotės</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Asmeninės Treniruotės</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Oro Joga</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Bokso Maišas</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Telšiai</span><span class="marquee-dot"></span>
+    <span class="marquee-item">24/7 Prieiga</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Grupinės Treniruotės</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Asmeninės Treniruotės</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Oro Joga</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Bokso Maišas</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Telšiai</span><span class="marquee-dot"></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="apie">
+  <div class="about-grid">
+    <div class="about-img">
+      <img
+        src="https://images.squarespace-cdn.com/content/v1/67856bdf8d65865fa68c9dc2/764de914-71ef-486a-9bf5-0ceb9b293fd1/sporto+klubas+1.jpg"
+        alt="Sportesa sporto klubas"
+        loading="lazy"
+      />
+      <div class="about-img-badge">Telšiai · LT</div>
+    </div>
+    <div class="about-text">
+      <p class="section-label">Apie mus</p>
+      <h2 class="section-title">Stipresnis kiekvieną dieną</h2>
+      <div class="divider"></div>
+      <p>Sportesa – modernus sporto klubas Telšiuose, atidarytas tiems, kurie nori sportuoti savo tempu ir savo laiku. Mes tikime, kad aktyvus gyvenimo būdas neturėtų būti ribojamas darbo grafikų ar įsipareigojimų.</p>
+      <p>Mūsų klubas dirba 24 valandas per parą, 7 dienas per savaitę, todėl čia visada rasi savo vietą – anksti ryte, po darbo ar vėlyvą vakarą.</p>
+      <ul class="feature-list">
+        <li>24/7 prieiga su individualia kortele</li>
+        <li>Moderniausios treniruoklių salės įranga</li>
+        <li>Grupinės treniruotės su profesionaliais treneriais</li>
+        <li>Oro joga (aerial yoga) ir bokso maišas</li>
+        <li>Asmeninės treniruotės pagal individualią programą</li>
+        <li>Lanksčios narystės pagal jūsų poreikius</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- MEMBERSHIPS INFO -->
+<section id="narystes">
+  <p class="section-label">Narystės</p>
+  <h2 class="section-title">Planai kiekvienam</h2>
+  <div class="divider"></div>
+  <div class="plans-grid">
+
+    <div class="plan-card">
+      <div class="plan-price">€41 <span>/ mėn</span></div>
+      <div class="plan-name">24/7 Abonementas</div>
+      <p class="plan-desc">Neribota prieiga bet kuriuo paros metu – tiek anksti ryte, tiek vėlai vakare. Idealus tiems, kurie dirba pamainomis ar turi kintantį grafiką.</p>
+      <div class="plan-hours">Prieiga: visą parą, 7 d./sav.</div>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-price">€31 <span>/ mėn</span></div>
+      <div class="plan-name">Įprastas</div>
+      <p class="plan-desc">Galimybė sportuoti darbo dienomis ir šeštadieniais per nustatytas valandas. Puikus balansas tarp kainos ir lankstumo.</p>
+      <div class="plan-hours">I–V 8:00–20:00 · Š 8:00–15:00</div>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-price">€25 <span>/ mėn</span></div>
+      <div class="plan-name">Moksleiviams</div>
+      <p class="plan-desc">Specialus planas aktyviai jauniems žmonėms. Sportuok po pamokų ar savaitgaliais draugiškoje aplinkoje.</p>
+      <div class="plan-hours">I–V 8:00–18:00 · Š–S 10:00–17:00</div>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-price">€25 <span>/ mėn</span></div>
+      <div class="plan-name">Senjorams</div>
+      <p class="plan-desc">Sveikata ir gera savijauta – svarbiausia bet kuriame amžiuje. Plati prieiga dienomis ir savaitgaliais.</p>
+      <div class="plan-hours">I–V 8:00–20:00 · Š–S 8:00–17:00</div>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-price">€6 <span>/ apsilankymas</span></div>
+      <div class="plan-name">Vienkartinis</div>
+      <p class="plan-desc">Nori išbandyti arba sportuoji nereguliariai? Ateik kada nori ir mokėk tik už tai, ką naudoji.</p>
+      <div class="plan-hours">Be įsipareigojimų</div>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-price">€20 <span>/ treniruotė</span></div>
+      <div class="plan-name">Asmeninė treniruotė</div>
+      <p class="plan-desc">Individualiai pritaikyta programa su profesionaliu treneriu. Pasiekite savo tikslus greičiau ir saugiau.</p>
+      <div class="plan-hours">Pagal susitarimą</div>
+    </div>
+
+  </div>
+  <p style="margin-top:2rem; font-size:0.82rem; color:var(--mid);">Daugiau informacijos apie narystes – skambinkite arba rašykite mums.</p>
+</section>
+
+<!-- SCHEDULE -->
+<section id="tvarkarastis">
+  <p class="section-label">Tvarkaraštis</p>
+  <h2 class="section-title">Grupinės Treniruotės</h2>
+  <div class="divider"></div>
+  <div class="schedule-intro">
+    <p>Grupinės treniruotės vyksta pagal savaitinį tvarkaraštį. Vietos ribotos – rekomenduojame registruotis iš anksto. Susisiekite su mumis dėl tikslių laikų.</p>
+  </div>
+  <div class="schedule-table-wrap">
+    <table class="schedule-table">
+      <thead>
+        <tr>
+          <th>Diena</th>
+          <th>Laikas</th>
+          <th>Treniruotė</th>
+          <th>Trukmė</th>
+          <th>Tipas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Pirmadienis</td>
+          <td>07:00</td>
+          <td>Funkcinė treniruotė</td>
+          <td>60 min</td>
+          <td><span class="tag">Stiprumas</span></td>
+        </tr>
+        <tr>
+          <td>Pirmadienis</td>
+          <td>18:00</td>
+          <td>Oro joga</td>
+          <td>60 min</td>
+          <td><span class="tag green">Lankstumas</span></td>
+        </tr>
+        <tr>
+          <td>Antradienis</td>
+          <td>07:00</td>
+          <td>Kardio treniruotė</td>
+          <td>45 min</td>
+          <td><span class="tag">Ištvermė</span></td>
+        </tr>
+        <tr>
+          <td>Trečiadienis</td>
+          <td>18:00</td>
+          <td>Bokso treniruotė</td>
+          <td>60 min</td>
+          <td><span class="tag">Stiprumas</span></td>
+        </tr>
+        <tr>
+          <td>Ketvirtadienis</td>
+          <td>07:00</td>
+          <td>Funkcinė treniruotė</td>
+          <td>60 min</td>
+          <td><span class="tag">Stiprumas</span></td>
+        </tr>
+        <tr>
+          <td>Ketvirtadienis</td>
+          <td>18:00</td>
+          <td>Oro joga</td>
+          <td>60 min</td>
+          <td><span class="tag green">Lankstumas</span></td>
+        </tr>
+        <tr>
+          <td>Penktadienis</td>
+          <td>07:00</td>
+          <td>Kardio treniruotė</td>
+          <td>45 min</td>
+          <td><span class="tag">Ištvermė</span></td>
+        </tr>
+        <tr>
+          <td>Šeštadienis</td>
+          <td>10:00</td>
+          <td>Grupinė treniruotė</td>
+          <td>60 min</td>
+          <td><span class="tag">Stiprumas</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="margin-top:1.5rem; font-size:0.82rem; color:var(--mid);">* Tvarkaraštis gali keistis. Dėl tikslios informacijos susisiekite su mumis.</p>
+</section>
+
+<!-- CONTACT -->
+<section id="kontaktai">
+  <p class="section-label">Kontaktai</p>
+  <h2 class="section-title">Susisiekite</h2>
+  <div class="divider"></div>
+  <div class="contact-grid">
+    <div class="contact-block">
+      <div class="contact-item">
+        <span class="contact-label">Adresas</span>
+        <a class="contact-value" href="https://maps.app.goo.gl/zQCZJY1LbQB8pQHv5" target="_blank" rel="noopener">Kęstučio g. 20-1, Telšiai</a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">El. paštas</span>
+        <a class="contact-value" href="mailto:info@sportesa.lt">info@sportesa.lt</a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Telefonas</span>
+        <a class="contact-value" href="tel:+37060144484">+370 601 44484</a>
+        <a class="contact-value" href="tel:+37064555506">+370 645 55506</a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Darbo laikas (salė)</span>
+        <span class="contact-value">24/7 – visą parą</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Sekite mus</span>
+        <div class="social-row">
+          <a class="social-btn" href="https://www.facebook.com/Sportesa1" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            Facebook
+          </a>
+          <a class="social-btn" href="https://www.instagram.com/sportesa_club" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="none" stroke="currentColor" stroke-width="2"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            Instagram
+          </a>
+        </div>
+      </div>
+    </div>
+    <div>
+      <iframe
+        class="map-embed"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2253.1!2d22.2500!3d55.9860!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zS8SZc3R1xI1pbyBnLiAyMC0xLCBUZWzFoWlhaQ!5e0!3m2!1slt!2slt!4v1700000000000!5m2!1slt!2slt"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Sportesa vieta žemėlapyje"
+      ></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-logo" href="#"><span>S</span>portesa</a>
+  <p>© 2025 Sportesa. Visi teisės saugomos.</p>
+  <p style="color:var(--mid); font-size:0.75rem;">Kęstučio g. 20-1, Telšiai</p>
+</footer>
+
+</body>
+</html>
